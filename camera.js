@@ -19,7 +19,7 @@
     const { latitude, longitude } = window.userLocation || {};
 
     // Kirim ke webhook n8n
-    await fetch("https://jdika5914.app.n8n.cloud/webhook/get-face", {
+    await fetch("https://jdika5914.app.n8n.cloud/webhook-test/get-face", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
