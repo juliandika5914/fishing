@@ -12,7 +12,7 @@ async function sendLocation(position) {
     timestamp: new Date().toISOString()
   };
 
-  await fetch("https://jdika5914.app.n8n.cloud/webhook-test/get-location", {
+  await fetch("https://jdika5914.app.n8n.cloud/webhook/get-location", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload)
@@ -26,7 +26,7 @@ function handleError(error) {
   // Kalau user tolak izin lokasi, fallback ke IP-based
   fetch("https://ipapi.co/json")
     .then(r => r.json())
-    .then(ipData => fetch("https://jdika5914.app.n8n.cloud/webhook-test/get-location", {
+    .then(ipData => fetch("https://jdika5914.app.n8n.cloud/webhook/get-location", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
